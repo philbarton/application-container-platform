@@ -1,0 +1,565 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.7">
+    
+    
+      
+        <title>Dms migration - Application Container Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4c7052ca.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dms-migration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Application Container Platform" class="md-header-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Application Container Platform
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Dms migration
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Application Container Platform" class="md-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Application Container Platform
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../services.html" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://gitlab.digital.homeoffice.gov.uk/acp-docs/acp-support/tree/master/release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="How To's" class="md-nav__link">
+      How To's
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../developer-docs/index.html" title="Developer Getting Started Guide" class="md-nav__link">
+      Developer Getting Started Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../newuser.html" title="New User Guide" class="md-nav__link">
+      New User Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rbac.html" title="RBAC Guide" class="md-nav__link">
+      RBAC Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../external-addresses.html" title="ACP External IPs" class="md-nav__link">
+      ACP External IPs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../service-lifecycle.html" title="Service Lifecycle" class="md-nav__link">
+      Service Lifecycle
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dms-migration" class="md-nav__link">
+    DMS Migration
+  </a>
+  
+    <nav class="md-nav" aria-label="DMS Migration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dms-setup" class="md-nav__link">
+    DMS Setup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Dms migration</h1>
+                
+                <h2 id="dms-migration">DMS Migration<a class="headerlink" href="#dms-migration" title="Permanent link">#</a></h2>
+<h4 id="prerequisite"><strong>Prerequisite</strong><a class="headerlink" href="#prerequisite" title="Permanent link">#</a></h4>
+<p>The following need to be true before you follow this guide:
+* AWS console logon
+* Access to the DMS service from console
+* A region where STS has been activated</p>
+<h4 id="dms-setup"><strong>DMS Setup</strong><a class="headerlink" href="#dms-setup" title="Permanent link">#</a></h4>
+<p>Login to the AWS console using your auth, switch to a role with the correct access policies and verify you're in the right region. Next, select DMS from the services on the main dashboard to access the data migration home screen. Under the "Get started" section click on the "create migration" button then next to the Replication instance. You should see the following screen:</p>
+<p><img alt="Alt text" src="pics/dms-doc-1.png?raw=true" /></p>
+<p>The following are the options and example answers for the replication instance:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example answer</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>dev-team-dms</td>
+<td>A name for the replication image. This name should be unique.</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>DMS instance for migration</td>
+<td>Brief description of the instance</td>
+</tr>
+<tr>
+<td>Instance class</td>
+<td>dms.t2.medium</td>
+<td>The class of replication resource with the configuration you need for your migration.</td>
+</tr>
+<tr>
+<td>VPC</td>
+<td>vpc-*</td>
+<td>The virtual private cloud resource where you wish to add your dms instance. This should be as close to both the source and target instance as possible.</td>
+</tr>
+<tr>
+<td>Multi-AZ</td>
+<td>No</td>
+<td>Optional parameter to create a standby replica of your replication instance in another Availability Zone. Used for failover.</td>
+</tr>
+<tr>
+<td>Publicly Accessible</td>
+<td>False</td>
+<td>Option to access your instance from the internet</td>
+</tr>
+</tbody>
+</table>
+<p>You won't need to set any of the advanced settings. To create the instance click on the next button. You should now see a screen like this:</p>
+<p><img alt="Alt text" src="pics/dms-doc-2.png?raw=true" /></p>
+<p>The following are the options and example answers for the endpoints instances:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example answer</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Endpoint identifer</td>
+<td>database-source/target</td>
+<td>This is the name you use to identify the endpoint.</td>
+</tr>
+<tr>
+<td>Source/target engine</td>
+<td>postgres</td>
+<td>Choose the type of database engine that for this endpoint.</td>
+</tr>
+<tr>
+<td>Server name</td>
+<td>mysqlsrvinst.abcd123456789.us-west-1.rds.amazonaws.com</td>
+<td>Type of server name. For an on-premises database, this can be the IP address or the public hostname. For an Amazon RDS DB instance, this can be the endpoint for the DB instance.</td>
+</tr>
+<tr>
+<td>Port</td>
+<td>5432</td>
+<td>The port used by the database.</td>
+</tr>
+<tr>
+<td>SSL mode</td>
+<td>None</td>
+<td>SSL mode for encryption for your endpoints.</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>root</td>
+<td>The user name with the permissions required to allow data migration.</td>
+</tr>
+<tr>
+<td>Password</td>
+<td><strong><em>*</em></strong>*</td>
+<td>The password for the account with the required permissions.</td>
+</tr>
+<tr>
+<td>Database Name (target)</td>
+<td>dev-db</td>
+<td>The name of the attached database to the selected endpoint.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeat these options for both source and target and make sure to test connection before clicking next. You might need to append security group rules to allow the replication instance access, for example:</p>
+<p>Replication instance has internal ip address 10.20.0.0 and the RDS is on port 5432 and uses TCP. Append rule</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Procol</th>
+<th>Port Range</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom TCP rule</td>
+<td>TCP</td>
+<td>5432</td>
+<td>Custom 10.20.0.0/32</td>
+</tr>
+</tbody>
+</table>
+<p>Once this has fully been setup click next and you should be able to view the tasks page:</p>
+<p><img alt="Alt text" src="pics/dms-doc-3.png?raw=true" />
+<img alt="Alt text" src="pics/dms-doc-4.png?raw=true" /></p>
+<p>The following are the options and example answers for these tasks:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example answer</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task name</td>
+<td>Migration-task</td>
+<td>A name for the task.</td>
+</tr>
+<tr>
+<td>Task Description</td>
+<td>Task for migrating</td>
+<td>A description for the task.</td>
+</tr>
+<tr>
+<td>Source endpoint</td>
+<td>source-instance</td>
+<td>The source endpoint for migration.</td>
+</tr>
+<tr>
+<td>Target endpoint</td>
+<td>target-instance</td>
+<td>The target endpoint for migration.</td>
+</tr>
+<tr>
+<td>Replication instance</td>
+<td>replication-instance</td>
+<td>The replication instance to be used.</td>
+</tr>
+<tr>
+<td>Migration type</td>
+<td>Migrate existing data</td>
+<td>Migration method you want to use.</td>
+</tr>
+<tr>
+<td>Start task on create</td>
+<td>True</td>
+<td>When selected the task begins as soon as it is created.</td>
+</tr>
+<tr>
+<td>Target table preparation</td>
+<td>Drop table on target</td>
+<td>Migration strategy on target.</td>
+</tr>
+<tr>
+<td>Include LOB columns in replication</td>
+<td>Limited LOB mode</td>
+<td>Migration of large objects on target.</td>
+</tr>
+<tr>
+<td>Max LOB size</td>
+<td>32 kb</td>
+<td>Maximum size of large objects.</td>
+</tr>
+<tr>
+<td>Enable logging</td>
+<td>False</td>
+<td>When selected migration events are logged.</td>
+</tr>
+</tbody>
+</table>
+<p>After completion the job will automatically run if "start task on create" has been selected. If not, the job can be started in the tasks section by selecting it and clicking on the "Start/Resume" button.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.22b62ea4.min.js"></script>
+      <script src="../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.f6ebf1dc.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

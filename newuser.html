@@ -1,0 +1,693 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.7">
+    
+    
+      
+        <title>New User Guide - Application Container Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.4c7052ca.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#new-users" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="." title="Application Container Platform" class="md-header-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Application Container Platform
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              New User Guide
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Application Container Platform" class="md-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Application Container Platform
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="services.html" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://gitlab.digital.homeoffice.gov.uk/acp-docs/acp-support/tree/master/release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="how-to-docs/index.html" title="How To's" class="md-nav__link">
+      How To's
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="developer-docs/index.html" title="Developer Getting Started Guide" class="md-nav__link">
+      Developer Getting Started Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        New User Guide
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="newuser.html" title="New User Guide" class="md-nav__link md-nav__link--active">
+      New User Guide
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flow-for-new-users" class="md-nav__link">
+    Flow for new users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#office-365-account" class="md-nav__link">
+    Office 365 Account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vpn" class="md-nav__link">
+    VPN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-hub" class="md-nav__link">
+    Platform Hub
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-portal" class="md-nav__link">
+    Support Portal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internally-accessible" class="md-nav__link">
+    Internally Accessible
+  </a>
+  
+    <nav class="md-nav" aria-label="Internally Accessible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#artifactory" class="md-nav__link">
+    Artifactory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitlab" class="md-nav__link">
+    GitLab
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drone" class="md-nav__link">
+    Drone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kibana" class="md-nav__link">
+    Kibana
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sysdig" class="md-nav__link">
+    Sysdig
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-resources-s3-buckets-and-rds-instances" class="md-nav__link">
+    AWS Resources (S3 Buckets and RDS Instances)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#externally-accessible-for-open-source-projects" class="md-nav__link">
+    Externally Accessible (for open source projects)
+  </a>
+  
+    <nav class="md-nav" aria-label="Externally Accessible (for open source projects)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    GitHub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quay" class="md-nav__link">
+    Quay
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="rbac.html" title="RBAC Guide" class="md-nav__link">
+      RBAC Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="external-addresses.html" title="ACP External IPs" class="md-nav__link">
+      ACP External IPs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="service-lifecycle.html" title="Service Lifecycle" class="md-nav__link">
+      Service Lifecycle
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flow-for-new-users" class="md-nav__link">
+    Flow for new users
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#office-365-account" class="md-nav__link">
+    Office 365 Account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vpn" class="md-nav__link">
+    VPN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-hub" class="md-nav__link">
+    Platform Hub
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-portal" class="md-nav__link">
+    Support Portal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internally-accessible" class="md-nav__link">
+    Internally Accessible
+  </a>
+  
+    <nav class="md-nav" aria-label="Internally Accessible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#artifactory" class="md-nav__link">
+    Artifactory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitlab" class="md-nav__link">
+    GitLab
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drone" class="md-nav__link">
+    Drone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kibana" class="md-nav__link">
+    Kibana
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sysdig" class="md-nav__link">
+    Sysdig
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-resources-s3-buckets-and-rds-instances" class="md-nav__link">
+    AWS Resources (S3 Buckets and RDS Instances)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#externally-accessible-for-open-source-projects" class="md-nav__link">
+    Externally Accessible (for open source projects)
+  </a>
+  
+    <nav class="md-nav" aria-label="Externally Accessible (for open source projects)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    GitHub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quay" class="md-nav__link">
+    Quay
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="new-users">New Users<a class="headerlink" href="#new-users" title="Permanent link">#</a></h1>
+<h2 id="flow-for-new-users">Flow for new users<a class="headerlink" href="#flow-for-new-users" title="Permanent link">#</a></h2>
+<p>This document will go over the flow for getting access to our various services if you are finding difficulties with the specifics of the tasks outlined in this document please see the more detailed <a href="https://github.com/UKHomeOffice/application-container-platform/blob/master/docs/developer-docs/index.md">Developer Docs</a>.</p>
+<h2 id="office-365-account">Office 365 Account<a class="headerlink" href="#office-365-account" title="Permanent link">#</a></h2>
+<p>Licensed <a href="https://portal.office.com">Office 365</a> accounts should be requested from your Programme Management Office. We can request AD-only accounts to facilitate access to ACP services via Single Sign On as explained on the <a href="https://gitlab.digital.homeoffice.gov.uk/acp-docs/acp-support">Support page</a>
+Please note that to use SSO, which is using your Office 365 account to log onto other services, pop-ups will need to be enabled on your computer.</p>
+<h2 id="vpn">VPN<a class="headerlink" href="#vpn" title="Permanent link">#</a></h2>
+<p>VPN profiles are used to be able to get through to our multiple AWS environments as well as other data centers. The profiles can be downloaded from <a href="https://access-acp.digital.homeoffice.gov.uk">access</a> which you can access using your Office 365 SSO. The following services can be only accessed when connected to the ACP Platform VPN profile.</p>
+<h2 id="platform-hub">Platform Hub<a class="headerlink" href="#platform-hub" title="Permanent link">#</a></h2>
+<p><a href="https://hub.acp.homeoffice.gov.uk">The Platform Hub</a> serves as a central portal for users of ACP. It acts as an all-in-one place to find information, requests and also support for the platform. The Hub also provides tools to develop, build, deploy and manage all your projects.</p>
+<h2 id="support-portal">Support Portal<a class="headerlink" href="#support-portal" title="Permanent link">#</a></h2>
+<p>All support requests, changes, incidents and announcements for ACP are managed via <a href="https://support.acp.homeoffice.gov.uk/servicedesk">JIRA Service Desk</a>. A set of request templates have been created to cover a wide majority of general requests that users normally need. If your issue / request type is not listed, there is a <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/create/89">general request</a> form available.</p>
+<h2 id="internally-accessible">Internally Accessible<a class="headerlink" href="#internally-accessible" title="Permanent link">#</a></h2>
+<h3 id="artifactory">Artifactory<a class="headerlink" href="#artifactory" title="Permanent link">#</a></h3>
+<p><a href="https://artifactory.digital.homeoffice.gov.uk.">Artifactory</a> - Once you have an Office 365 account, you can sign in using the HOD SSO button. Requests for an Artifactory robot can be made on the <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/create/30">ACP Support Portal</a>. The docker repository in Artifactory is accessed via the <code>docker.digital.homeoffice.gov.uk</code> address.</p>
+<h3 id="gitlab">GitLab<a class="headerlink" href="#gitlab" title="Permanent link">#</a></h3>
+<p><a href="https://gitlab.digital.homeoffice.gov.uk">GitLab</a> - Once you have an Office 365 account, you can sign in using the Office 365 button.</p>
+<h3 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">#</a></h3>
+<p>You will need a Kubernetes user token before you can access any of the namespaces in the clusters. Follow the instructions here to get one for your teams namespaces: <a href="https://github.com/UKHomeOffice/application-container-platform/blob/master/docs/how-to-docs/kubernetes-user-token.md">Getting a Kubernetes Token for the UK cluster</a></p>
+<h3 id="drone">Drone<a class="headerlink" href="#drone" title="Permanent link">#</a></h3>
+<p>We have two instances; One for <a href="https://drone.acp.homeoffice.gov.uk">GitHub</a> and one for <a href="https://drone-gitlab.acp.homeoffice.gov.uk">GitLab</a>.</p>
+<h3 id="kibana">Kibana<a class="headerlink" href="#kibana" title="Permanent link">#</a></h3>
+<p><a href="https://kibana.acp.homeoffice.gov.uk">Kibana</a> is accessible to ACP users via the default VPN profile.</p>
+<h3 id="sysdig">Sysdig<a class="headerlink" href="#sysdig" title="Permanent link">#</a></h3>
+<p><a href="https://sysdig.digital.homeoffice.gov.uk">Sysdig</a> is also accessible to ACP users via the default VPN profile and requests for specific team views can be made on the <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/create/33">Support Portal</a>.</p>
+<h2 id="aws-resources-s3-buckets-and-rds-instances">AWS Resources (S3 Buckets and RDS Instances)<a class="headerlink" href="#aws-resources-s3-buckets-and-rds-instances" title="Permanent link">#</a></h2>
+<p>If you require an S3 bucket or an RDS instance you can submit a support request on the <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/group/8">Support Portal</a>.</p>
+<h2 id="externally-accessible-for-open-source-projects">Externally Accessible (for open source projects)<a class="headerlink" href="#externally-accessible-for-open-source-projects" title="Permanent link">#</a></h2>
+<p>The following services can be access without a VPN connection and with personal accounts.</p>
+<h3 id="github">GitHub<a class="headerlink" href="#github" title="Permanent link">#</a></h3>
+<p><a href="https://github.com/UKHomeOffice">Github</a> - To access our repositories you must have your personal Github invited to the UK Home Office organisation on Github. This is done during your first login to the Platform Hub. Please note that you will have to have your full name on your Github profile along with 2 Factor Authentication. If you don't have a personal account on Github, then you will need to create one.</p>
+<h3 id="quay">Quay<a class="headerlink" href="#quay" title="Permanent link">#</a></h3>
+<p><a href="https://quay.io">Quay</a> - You can access Quay using your GitHub account. Once you have been added to the ukhomeoffice organisation on Quay, you can create repositories in the organisation. If you are not already part of the organisation you can submit a <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/create/88">support request on the Support Portal to be added</a>. You will also need a robot created for you to push to your repository once you have created one. Requests for a Quay robot can be made on the <a href="https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/create/37">Support Portal</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="developer-docs/index.html" title="Developer Getting Started Guide" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Developer Getting Started Guide
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="rbac.html" title="RBAC Guide" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                RBAC Guide
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.22b62ea4.min.js"></script>
+      <script src="assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.f6ebf1dc.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

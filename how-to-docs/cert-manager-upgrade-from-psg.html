@@ -1,0 +1,996 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.7">
+    
+    
+      
+        <title>Migration from PSG kube-cert-manager resources to Jetstack cert-manager v0.13.1 - Application Container Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4c7052ca.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#migration-from-psg-kube-cert-manager-resources-to-jetstack-cert-manager-v0131" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Application Container Platform" class="md-header-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Application Container Platform
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Migration from PSG kube-cert-manager resources to Jetstack cert-manager v0.13.1
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Application Container Platform" class="md-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Application Container Platform
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../services.html" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://gitlab.digital.homeoffice.gov.uk/acp-docs/acp-support/tree/master/release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="How To's" class="md-nav__link">
+      How To's
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../developer-docs/index.html" title="Developer Getting Started Guide" class="md-nav__link">
+      Developer Getting Started Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../newuser.html" title="New User Guide" class="md-nav__link">
+      New User Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rbac.html" title="RBAC Guide" class="md-nav__link">
+      RBAC Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../external-addresses.html" title="ACP External IPs" class="md-nav__link">
+      ACP External IPs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../service-lifecycle.html" title="Service Lifecycle" class="md-nav__link">
+      Service Lifecycle
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-content" class="md-nav__link">
+    Table of Content
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-understanding-why-a-migration-is-needed" class="md-nav__link">
+    Background (understanding why a migration is needed)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-options" class="md-nav__link">
+    Migration options
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-renaming-secrets" class="md-nav__link">
+    Option 1 (renaming secrets)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-explicit-ingress-certificate" class="md-nav__link">
+    Option 2 (explicit ingress certificate)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-cert-manager-resources" class="md-nav__link">
+    Getting cert-manager resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-cert-manager-resources-for-v0131" class="md-nav__link">
+    Updating cert-manager resources for v0.13.1
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating cert-manager resources for v0.13.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-changes-recommended" class="md-nav__link">
+    Option 1 changes (recommended)
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1 changes (recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-ingress-with-dns-challenge-changes-recommended" class="md-nav__link">
+    External Ingress with DNS challenge changes (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-ingress-with-http-challenge-changes-recommended" class="md-nav__link">
+    External Ingress with HTTP challenge changes (recommended)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-ingress-with-dns-challenge-changes-recommended" class="md-nav__link">
+    Internal Ingress with DNS challenge changes (recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-changes" class="md-nav__link">
+    Option 2 changes
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2 changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-ingress-with-dns-challenge-changes-2-stages" class="md-nav__link">
+    External Ingress with DNS challenge changes (2 stages)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-ingress-with-http-challenge-changes-2-stages" class="md-nav__link">
+    External Ingress with HTTP challenge changes (2 stages)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-ingress-with-dns-challenge-changes-2-stages" class="md-nav__link">
+    Internal Ingress with DNS challenge changes (2 stages)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-verification" class="md-nav__link">
+    Deployment verification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="migration-from-psg-kube-cert-manager-resources-to-jetstack-cert-manager-v0131">Migration from PSG kube-cert-manager resources to Jetstack cert-manager v0.13.1<a class="headerlink" href="#migration-from-psg-kube-cert-manager-resources-to-jetstack-cert-manager-v0131" title="Permanent link">#</a></h1>
+<h2 id="table-of-content">Table of Content<a class="headerlink" href="#table-of-content" title="Permanent link">#</a></h2>
+<ol>
+<li><a href="#background-understanding-why-a-migration-is-needed">Background (understanding why a migration is needed)</a></li>
+<li><a href="#migration-options">Migration options</a><ol>
+<li><a href="#option-1-renaming-secrets">Option 1 (renaming secrets)</a></li>
+<li><a href="#option-2-explicit-ingress-certificate">Option 2 (explicit ingress certificate)</a></li>
+</ol>
+</li>
+<li><a href="#getting-cert-manager-resources">Getting cert-manager resources</a></li>
+<li><a href="#updating-cert-manager-resources-for-v0131">Updating cert-manager resources for v0.13.1</a><ol>
+<li><a href="#option-1-changes-recommended">Option 1 changes (recommended)</a><ol>
+<li><a href="#external-ingress-with-dns-challenge-changes-recommended">External Ingress with DNS challenge changes (recommended)</a></li>
+<li><a href="#external-ingress-with-http-challenge-changes-recommended">External Ingress with HTTP challenge changes (recommended)</a></li>
+<li><a href="#internal-ingress-with-dns-challenge-changes-recommended">Internal Ingress with DNS challenge changes (recommended)</a></li>
+</ol>
+</li>
+<li><a href="#option-2-changes">Option 2 changes</a><ol>
+<li><a href="#external-ingress-with-dns-challenge-changes-2-stages">External Ingress with DNS challenge changes (2 stages)</a></li>
+<li><a href="#external-ingress-with-http-challenge-changes-2-stages">External Ingress with HTTP challenge changes (2 stages)</a></li>
+<li><a href="#internal-ingress-with-dns-challenge-changes-2-stages">Internal Ingress with DNS challenge changes (2 stages)</a></li>
+</ol>
+</li>
+<li><a href="#deployment-verification">Deployment verification</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="background-understanding-why-a-migration-is-needed">Background (understanding why a migration is needed)<a class="headerlink" href="#background-understanding-why-a-migration-is-needed" title="Permanent link">#</a></h2>
+<p><a href="https://github.com/PalmStoneGames/kube-cert-manager">PalmStoneGames/kube-cert-manager</a> has been deprecated and not updated for 2 years, but more importantly it will stop being supported by LetsEncrypt in June 2020.</p>
+<h2 id="migration-options">Migration options<a class="headerlink" href="#migration-options" title="Permanent link">#</a></h2>
+<p>There are 2 possible approaches for the migration of <code>Ingress</code> resources. The high-level steps for both approaches are expanded below.</p>
+<p>For a more detailed understanding of how the manifest files need to be updated, please refer to section <a href="#updating-cert-manager-resources-for-v0131">Updating cert-manager resources for v0.13.1</a> below.</p>
+<p>Option 1 below is strongly recommended as the approach.</p>
+<h3 id="option-1-renaming-secrets">Option 1 (renaming secrets)<a class="headerlink" href="#option-1-renaming-secrets" title="Permanent link">#</a></h3>
+<p>By far the easiest and safest option is to amend the annotations and labels of your <code>Ingress</code> resources as described below <strong>while at the same time also renaming the associated secrets</strong>.</p>
+<p>Renaming the secret (changing the value of <code>secretName</code> in your <code>Ingress</code> resource) will make sure that the same secret is not managed by 2 certificate managers (PSG kube-cert-manager and JetStack's cert-manager v0.13.1).</p>
+<p>To keep names consistent, you could for example add a <code>-cmio</code> suffix  (standing for <code>cert-manager.io</code>) to all the <code>secretName</code> attributes in the <code>Ingress</code> resources as shown below in the example section.</p>
+<ul>
+<li>Amend <code>Ingress</code> resources:</li>
+<li>amend the <code>Ingress</code>'s annotations and labels as described below</li>
+<li>change the value of <code>secretName</code></li>
+<li>Deploy the changes</li>
+<li>When you've checked that the service is functioning as intended, you can tidy up the old secrets that used to be managed by PSG kube-cert-manager:</li>
+<li>delete any secrets that was previously associated with the <code>Ingress</code> (back them up to be safe)</li>
+<li>You can check that the certificate resources automatically created by cert-manager thanks to your ingress annotations are valid by running <code>kubectl -n project get certificate.cert-manager.io</code>. The <code>READY</code> field for the resources should be <code>TRUE</code>. Note that it might take a short while (typically no more than about a couple of minutes) for the certificates to reach that <code>READY</code> state.</li>
+</ul>
+<p>The main draw-back of this approach is that the value for the new secret being created will need to be created from LetsEncrypt. This is usually quite quick, but could take up to around 2 minutes.</p>
+<p>During the time the new certificate is being requested and LetsEncrypt performs its http or dns challenge, your ingress will not have a valid certificate.
+So access to the endpoint is disrupted for that period whilst the challenge is being completed and new cert/secret generated.</p>
+<p>If you are keen on minimising service disruption further and only have current connections reset, please evaluate Option 2 below.</p>
+<h3 id="option-2-explicit-ingress-certificate">Option 2 (explicit ingress certificate)<a class="headerlink" href="#option-2-explicit-ingress-certificate" title="Permanent link">#</a></h3>
+<p>This option is more complex than Option 1 and should only be considered if there are concerens with service availability while ingresses do not have a valid certifcate during the initial new certificate request.</p>
+<p>If not performed properly, you will gain nothing from it and it will have the same impact as Option 1.</p>
+<p>The high levels steps are:</p>
+<ul>
+<li>Leave the current <code>Ingress</code> resource as it is (whith the PSG annotations)</li>
+<li>Create a <code>Certificate</code> resource with <code>letsencrypt-prod</code> as the clusterIssuer, a secret name different from the one used by the Ingress and the appropriate stanzas as shown later on this guide. You might want to use the <code>letsencrypt-staging</code> clusterIssuer instead of <code>letsencrypt-prod</code> while changing your Certificate manifest file and testing it in order to not reach the weekly limits imposed by LetsEncrypt on its prod server and switch to <code>letsencrypt-prod</code> once you know your <code>Certificate</code> resource works as you expect.</li>
+<li>Deploy the changes to create the new <code>Certificate</code> resource. Please note that the certificate and associated secret will at that point be unused, but make sure the <code>Certificate</code> is ready before deploying the next set of changes. You can check that by running <code>kubectl get certificates.cert-manager.io</code> in your namespace.</li>
+<li>Update your <code>Ingress</code> resources</li>
+<li>Remove all <code>stable.k8s.psg.io</code> annotations and labels</li>
+<li><em>DO NOT</em> add any new <code>cert-manager.io</code> annotations or labels</li>
+<li>Update <code>secretName</code> in the <code>Ingress</code> resource to the name of the secret you created in step 2 (the secret associated with your <code>Certficate</code> resource)</li>
+<li>Deploy the <code>Ingress</code> changes</li>
+<li>When you've checked that the service is functioning as intended and that its certificate has been updated, you can tidy up the old secrets:</li>
+<li>delete any secrets previously associated with the ingress (back them up to be safe)</li>
+<li>You can check that the certificate resources are valid by running <code>kubectl -n project get certificates.cert-manager.io</code>. The <code>READY</code> field for the resources should be <code>TRUE</code>. Note that it might take a short while (typically no more than about a couple of minutes) for the certificates to reach that <code>READY</code> state.</li>
+</ul>
+<p>Please note that during the development lifecycle, you will quite naturally deploy the 2 changes above when they are made in 2 separate commit points.</p>
+<p>However, when it comes to deploying to other environments once the commits already exist, make sure to deploy the commit associated with the first step (<code>Certificate</code> creation), wait for the <code>Certificate</code> resource to be ready and only deploy the change to the ingress once it is. If you do not wait and deploy those changes in quick succession, the outcome will be the same as for option 1: your service will be unavailable as it will not have a valid certificate until letsencrypt returns a new one.</p>
+<h2 id="getting-cert-manager-resources">Getting cert-manager resources<a class="headerlink" href="#getting-cert-manager-resources" title="Permanent link">#</a></h2>
+<p>As <code>cert-manager</code> is being upgraded from v0.8 to v0.13.1 and in order to allow development teams to upgrade their <code>cert-manager</code> resources according to their own schedule, both v0.8 and v.13.1 resources will be available concurrently for a period of time.</p>
+<p>While the older version of <code>cert-manager</code> (v0.8) is still available on the ACP platform, resources managed by the newer version of cert-manager (v0.13.1+) can only be accessed from the API server by suffixing the resource kind with <code>.cert-manager.io</code>.</p>
+<p>For example:</p>
+<pre><code># to access v0.13.1 cert-manager resources
+kubectl -n project get certificate.cert-manager.io
+kubectl -n project get orders.acme.cert-manager.io
+kubectl -n project get challenge.acme.cert-manager.io
+</code></pre>
+
+<pre><code># to access v0.8 cert-manager resources
+kubectl -n project get certificate
+kubectl -n project get orders
+kubectl -n project get challenge
+# or
+kubectl -n project get certificate.certmanager.k8s.io
+kubectl -n project get orders.certmanager.k8s.io
+kubectl -n project get challenge.certmanager.k8s.io
+</code></pre>
+
+<h2 id="updating-cert-manager-resources-for-v0131">Updating cert-manager resources for v0.13.1<a class="headerlink" href="#updating-cert-manager-resources-for-v0131" title="Permanent link">#</a></h2>
+<p>The following examples are based on the <a href="https://github.com/ukhomeoffice/kube-example-app">kube-example</a> project.</p>
+<h3 id="option-1-changes-recommended">Option 1 changes (recommended)<a class="headerlink" href="#option-1-changes-recommended" title="Permanent link">#</a></h3>
+<h4 id="external-ingress-with-dns-challenge-changes-recommended">External Ingress with DNS challenge changes (recommended)<a class="headerlink" href="#external-ingress-with-dns-challenge-changes-recommended" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed externally with ACME DNS challenge suitable when your domain is hosted as a Route53 zone.</p>
+<p>The following <code>Ingress</code> resource with PSG labels and annotations</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+    # @Note: your ingress might not specify stable.k8s.psg.io/kcm.provider as dns is the default provider
+    stable.k8s.psg.io/kcm.provider: dns
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls
+</code></pre>
+
+<p>should be changed to <code>Ingress</code> resource with the following v0.11+ annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: make sure you DON'T have the following annotation: kubernetes.io/tls-acme: &quot;true&quot;
+    # @Note: add the enabled annotation to cert-manager.io/enabled
+    cert-manager.io/enabled: &quot;true&quot;
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+  labels:
+    # @Note: remove any psg labels you might have
+    # @Note: add label cert-manager.io/solver to specify that the route53 dns01 solver should be used
+    cert-manager.io/solver: route53
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+</code></pre>
+
+<h4 id="external-ingress-with-http-challenge-changes-recommended">External Ingress with HTTP challenge changes (recommended)<a class="headerlink" href="#external-ingress-with-http-challenge-changes-recommended" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed externally with ACME HTTP challenge</p>
+<p>The following <code>Ingress</code> resource with PSG labels and annotations</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+    stable.k8s.psg.io/kcm.provider: http
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls
+</code></pre>
+
+<p>should be changed to <code>Ingress</code> resource with the following v0.11+ annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: add the enabled annotation to cert-manager.io/enabled
+    cert-manager.io/enabled: &quot;true&quot;
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+  labels:
+    # @Note: remove any psg labels you might have
+    # @Note: add label cert-manager.io/solver to specify that the http01 solver should be used
+    # @Note: the label below is actually optional because http01 the default value
+    cert-manager.io/solver: http01
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+</code></pre>
+
+<h4 id="internal-ingress-with-dns-challenge-changes-recommended">Internal Ingress with DNS challenge changes (recommended)<a class="headerlink" href="#internal-ingress-with-dns-challenge-changes-recommended" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed internally with ACME DNS challenge suitable when your domain is hosted as a Route53 zone.</p>
+<p>The following <code>Ingress</code> resource with PSG labels and annotations</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-internal
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-internal&quot;
+    # @Note: your ingress might not specify stable.k8s.psg.io/kcm.provider as dns is the default provider
+    stable.k8s.psg.io/kcm.provider: dns
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_INTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_INTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-internal-tls
+</code></pre>
+
+<p>should be changed to <code>Ingress</code> resource with the following v0.11+ annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-internal
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: make sure you DON'T have the following annotation: kubernetes.io/tls-acme: &quot;true&quot;
+    # @Note: add the enabled annotation to cert-manager.io/enabled
+    cert-manager.io/enabled: &quot;true&quot;
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-internal&quot;
+  labels:
+    # @Note: remove any psg labels you might have
+    # @Note: add label cert-manager.io/solver to specify that the route53 dns01 solver should be used
+    cert-manager.io/solver: route53
+spec:
+  rules:
+  - host: {{ .APP_HOST_INTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_INTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-internal-tls-cmio
+</code></pre>
+
+<h3 id="option-2-changes">Option 2 changes<a class="headerlink" href="#option-2-changes" title="Permanent link">#</a></h3>
+<h4 id="external-ingress-with-dns-challenge-changes-2-stages">External Ingress with DNS challenge changes (2 stages)<a class="headerlink" href="#external-ingress-with-dns-challenge-changes-2-stages" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed externally with ACME DNS challenge suitable when your domain is hosted as a Route53 zone.</p>
+<p>The following <code>Ingress</code> resource with PSG annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+    # @Note: your ingress might not specify stable.k8s.psg.io/kcm.provider as dns is the default provider
+    stable.k8s.psg.io/kcm.provider: dns
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls
+</code></pre>
+
+<p>should be initially left unchanged.</p>
+<p>Deploy a new certificate</p>
+<pre><code class="YAML">apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+  labels:
+    # @Note: specify label cert-manager.io/solver to specify that the route53 dns01 solver should be used
+    cert-manager.io/solver: route53
+spec:
+  secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+  issuerRef:
+    # use letsencrypt-staging while developing and testing your certificates
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames:
+  - {{ .APP_HOST_EXTERNAL }}
+</code></pre>
+
+<p>Once the certificate is ready (run <code>kubectl get certificates.cert-manager.io</code> to find out its state), change and deploy the <code>Ingress</code> resource to specify the new secret name:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: no cert-manager.io annotations or labels are added
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+</code></pre>
+
+<h4 id="external-ingress-with-http-challenge-changes-2-stages">External Ingress with HTTP challenge changes (2 stages)<a class="headerlink" href="#external-ingress-with-http-challenge-changes-2-stages" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed externally</p>
+<p>The following <code>Ingress</code> resource with PSG annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+    stable.k8s.psg.io/kcm.provider: http
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls
+</code></pre>
+
+<p>should be initially left unchanged.</p>
+<p>Deploy a new certificate</p>
+<pre><code class="YAML">apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+  labels:
+    # @Note: specify label cert-manager.io/solver to specify that the http01 solver should be used
+    # @Note: alternatively, specify no cert-manager.io/solver label as http01 is the default
+    cert-manager.io/solver: http01
+spec:
+  secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+  issuerRef:
+    # use letsencrypt-staging while developing and testing your certificates
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames:
+  - {{ .APP_HOST_EXTERNAL }}
+</code></pre>
+
+<p>Once the certificate is ready (run <code>kubectl get certificates.cert-manager.io</code> to find out its state), change and deploy the <code>Ingress</code> resource to specify the new secret name:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-external
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: no cert-manager.io annotations or labels are added
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-external&quot;
+spec:
+  rules:
+  - host: {{ .APP_HOST_EXTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_EXTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-external-tls-cmio
+</code></pre>
+
+<h4 id="internal-ingress-with-dns-challenge-changes-2-stages">Internal Ingress with DNS challenge changes (2 stages)<a class="headerlink" href="#internal-ingress-with-dns-challenge-changes-2-stages" title="Permanent link">#</a></h4>
+<p>Changes required for websites or services exposed internally with ACME DNS challenge suitable when your domain is hosted as a Route53 zone.</p>
+<p>The following <code>Ingress</code> resource with PSG annotations:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-internal
+  annotations:
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-internal&quot;
+    # @Note: your ingress might not specify stable.k8s.psg.io/kcm.provider as dns is the default provider
+    stable.k8s.psg.io/kcm.provider: dns
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+spec:
+  rules:
+  - host: {{ .APP_HOST_INTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_INTERNAL }}
+    secretName: {{ .DEPLOYMENT_NAME }}-internal-tls
+</code></pre>
+
+<p>should be initially left unchanged.</p>
+<p>Deploy a new certificate</p>
+<pre><code class="YAML">apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-internal-tls-cmio
+  labels:
+    # @Note: specify label cert-manager.io/solver to specify that the route53 dns01 solver should be used
+    cert-manager.io/solver: route53
+spec:
+  secretName: {{ .DEPLOYMENT_NAME }}-internal-tls-cmio
+  issuerRef:
+    # use letsencrypt-staging while developing and testing your certificates
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames:
+  - {{ .APP_HOST_INTERNAL }}
+</code></pre>
+
+<p>Once the certificate is ready (run <code>kubectl get certificates.cert-manager.io</code> to find out its state), change and deploy the <code>Ingress</code> resource to specify the new secret name:</p>
+<pre><code class="YAML">apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .DEPLOYMENT_NAME }}-internal
+  annotations:
+    # @Note: get rid of any psg annotations
+    # @Note: no cert-manager.io annotations or labels are added
+    ingress.kubernetes.io/backend-protocol: &quot;HTTPS&quot;
+    ingress.kubernetes.io/force-ssl-redirect: &quot;true&quot;
+    kubernetes.io/ingress.class: &quot;nginx-internal&quot;
+spec:
+  rules:
+  - host: {{ .APP_HOST_INTERNAL }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .DEPLOYMENT_NAME }}
+          servicePort: 10443
+        path: /
+  tls:
+  - hosts:
+    - {{ .APP_HOST_INTERNAL }}
+    # @Note: change the secret name
+    secretName: {{ .DEPLOYMENT_NAME }}-internal-tls-cmio
+</code></pre>
+
+<h3 id="deployment-verification">Deployment verification<a class="headerlink" href="#deployment-verification" title="Permanent link">#</a></h3>
+<p>Once you have applied the changes above, you should no longer have <code>Ingress</code> resources managed by PSG kube-cert-manager.</p>
+<p>To verify that's the case, run <code>kubectl get ingresses -o yaml | grep stable.k8s.psg.io</code>. An empty list should be returned.</p>
+<p>To verify that the new version of cert-manager is managing the certificates, run <code>kubectl get certificate.cert-manager.io -n my-namespace</code>. An non-empty list of resources should be returned. Those are the <code>Certificate</code> resources which have been created by cert-manager's ingress shim.</p>
+<p>Once the development teams have migrated all their resources to the new version of cert-manager, the PSG kube-cert-manager and cert-manager v0.8 will be decommissioned.</p>
+<p>When that's done it will no longer be needed to append <code>.cert-manager.io</code> to the resource kinds when using <code>kubectl</code>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.22b62ea4.min.js"></script>
+      <script src="../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.f6ebf1dc.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

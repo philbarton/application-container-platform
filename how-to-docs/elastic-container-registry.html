@@ -1,0 +1,612 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.7">
+    
+    
+      
+        <title>Elastic container registry - Application Container Platform</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4c7052ca.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-ecr-for-private-docker-images" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Application Container Platform" class="md-header-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Application Container Platform
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Elastic container registry
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Application Container Platform" class="md-nav__button md-logo" aria-label="Application Container Platform">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Application Container Platform
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../services.html" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://gitlab.digital.homeoffice.gov.uk/acp-docs/acp-support/tree/master/release-notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="How To's" class="md-nav__link">
+      How To's
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../developer-docs/index.html" title="Developer Getting Started Guide" class="md-nav__link">
+      Developer Getting Started Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../newuser.html" title="New User Guide" class="md-nav__link">
+      New User Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rbac.html" title="RBAC Guide" class="md-nav__link">
+      RBAC Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../external-addresses.html" title="ACP External IPs" class="md-nav__link">
+      ACP External IPs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../service-lifecycle.html" title="Service Lifecycle" class="md-nav__link">
+      Service Lifecycle
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aws-ecr-for-private-docker-images" class="md-nav__link">
+    AWS ECR for Private Docker Images
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS ECR for Private Docker Images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-docker-repository" class="md-nav__link">
+    Creating a Docker Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-access-credentials" class="md-nav__link">
+    Generating Access Credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-a-docker-repository" class="md-nav__link">
+    Accessing a Docker Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-requisites" class="md-nav__link">
+    Pre-Requisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-retrieve-an-authorisation-token" class="md-nav__link">
+    Step 1: Retrieve an authorisation token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-login-with-authorisation-token" class="md-nav__link">
+    Step 2: Login with Authorisation Token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pulling-pushing-images" class="md-nav__link">
+    Pulling &amp; Pushing Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listing-images-housekeeping" class="md-nav__link">
+    Listing Images &amp; Housekeeping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-image-deployments-via-drone-ci" class="md-nav__link">
+    Managing Image Deployments via Drone CI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Elastic container registry</h1>
+                
+                <h2 id="aws-ecr-for-private-docker-images">AWS ECR for Private Docker Images<a class="headerlink" href="#aws-ecr-for-private-docker-images" title="Permanent link">#</a></h2>
+<p>AWS ECR (Elastic Container Registry) is now available as a self-service feature via the Platform Hub. Each project has the capability to create their own Docker Repositories and define individual access to each via the use of IAM Credentials.</p>
+<h4 id="creating-a-docker-repository">Creating a Docker Repository<a class="headerlink" href="#creating-a-docker-repository" title="Permanent link">#</a></h4>
+<p>Anybody that is part of a Project within the Platform Hub will have the ability to create a new Docker Repository.</p>
+<ol>
+<li>Login to the Platform Hub via https://hub.acp.homeoffice.gov.uk</li>
+<li>Navigate to the Projects list: https://hub.acp.homeoffice.gov.uk/projects/list</li>
+<li>Select your Project from the list to go to the detail page (e.g. https://hub.acp.homeoffice.gov.uk/projects/detail/acp)<ul>
+<li>Ensure you have a <strong>Service</strong> defined within your Project for the Docker Repository to be associated with (check under the <code>SERVICES</code> tab)</li>
+</ul>
+</li>
+<li>Select the <code>ALL DOCKER REPOS</code> tab</li>
+<li>Select the <code>REQUEST NEW DOCKER REPO</code> button</li>
+<li>Choose the Service to associate this Repository with and provide the name of the Repository to be created (e.g. <code>hello-world-app</code>)</li>
+</ol>
+<p>The request to create a new Docker Repository can take a few seconds to complete. You can view the status of a Repository by navigating to the <code>ALL DOCKER REPOS</code> tab and viewing the list. Once the request has completed, your Repository should have the <code>Active</code> label associated with it.</p>
+<p>This repository won't automatically refresh, but you can hit the <code>REFRESH</code> button above the Repository list or just manually refresh your browser window for updates.</p>
+<h4 id="generating-access-credentials">Generating Access Credentials<a class="headerlink" href="#generating-access-credentials" title="Permanent link">#</a></h4>
+<p>Access to ECR Repositories is managed via AWS IAM. These IAM credentials are generated via the Platform Hub and access can be managed per user, per Docker Repository.</p>
+<ol>
+<li>Navigate to the <code>ALL DOCKER REPOS</code> tab for your Project within the Platform Hub</li>
+<li>For the Repository you have created, select the <code>MANAGE ACCESS</code> button</li>
+<li>At this stage, you can:<ul>
+<li>Create a Robot Account(s), which can be used in deployment pipelines in Drone CI for publishing new images to AWS ECR</li>
+<li>Select which Project Members have the ability to pull images, and additionally push updates using their own IAM credentials (separate to the Robot Account(s) and CI builds)</li>
+</ul>
+</li>
+<li>For this example, select your own User and press <code>Save</code>.<ul>
+<li><strong>Note:</strong> Generally users should never be granted write access, as any write actions should be performed via CI (using the Robot Accounts).</li>
+</ul>
+</li>
+<li>Press the <code>REFRESH</code> button at the top of the page and check the User Access has a status of <code>active</code></li>
+</ol>
+<p>Robot Accounts are visible under the Docker Repository, and once they reveal an <code>active</code> status the IAM Credentials are displayed alongside it.</p>
+<h4 id="accessing-a-docker-repository">Accessing a Docker Repository<a class="headerlink" href="#accessing-a-docker-repository" title="Permanent link">#</a></h4>
+<p>Accessing the AWS Container Registry to Pull &amp; Push images is currently a two-step process:
+1. Use IAM Credentials to generate a temporary authorisation token
+1. Use the temporary authorisation token to authenticate your docker client with ECR</p>
+<blockquote>
+<p><strong>Note:</strong> The authorisation token generated for docker login is only valid for 12 hours, and so the process above will need to be repeated.</p>
+</blockquote>
+<h4 id="pre-requisites">Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permanent link">#</a></h4>
+<p>To follow the below steps you must have:
+* AWS CLI (version 1.11.91 or above, check with <code>aws --version</code>)
+  * Install Guides: <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html">Linux</a>, <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-macos.html">OSX</a>, <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html">Windows</a>
+* Docker (version 17.06 or above, check with <code>docker --version</code>)</p>
+<h4 id="step-1-retrieve-an-authorisation-token">Step 1: Retrieve an authorisation token<a class="headerlink" href="#step-1-retrieve-an-authorisation-token" title="Permanent link">#</a></h4>
+<ol>
+<li>Navigate to the <code>Connected Identities</code> page: https://hub.acp.homeoffice.gov.uk/identities</li>
+<li>Under <code>Amazon ECR</code> you will have access to your own personal IAM Credentials. These credentials will work across multiple projects whose Repositories you have been granted access to.</li>
+</ol>
+<p>With the AWS IAM Credentials retrieved from the <code>Connected Identities</code> page, setup a local IAM Profile via the Terminal:</p>
+<pre><code class="bash">$ aws configure --profile acp-ecr
+
+AWS Access Key ID [None]: XXXXXXXXXXXXXXXXXXXX
+AWS Secret Access Key [None]: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Default region name [None]: eu-west-2
+Default output format [None]: json
+
+$ export AWS_PROFILE=acp-ecr
+</code></pre>
+
+<p>Now, using the aws-cli you can request an authorisation token to perform a docker login:</p>
+<pre><code class="bash">$ aws ecr get-login --no-include-email
+
+docker login -u AWS -p &lt;long-auth-token&gt; https://340268328991.dkr.ecr.eu-west-2.amazonaws.com
+</code></pre>
+
+<h4 id="step-2-login-with-authorisation-token">Step 2: Login with Authorisation Token<a class="headerlink" href="#step-2-login-with-authorisation-token" title="Permanent link">#</a></h4>
+<p>Following a successful <code>ecr get-login</code>, a full docker login command should be returned. Copy and paste the command exactly, to login to the ECR endpoint:</p>
+<pre><code class="bash">$ docker login -u AWS -p &lt;long-auth-token&gt; https://340268328991.dkr.ecr.eu-west-2.amazonaws.com
+
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> 
+If you get an error from Step 1 such as <code>Unknown options: --no-include-email</code>, your aws-cli client needs updating. You can omit <code>--no-include-email</code> rather than updating your aws-cli client, but the resulting docker login command will include a deprecated <code>-e none</code> flag (needs to be removed prior to running the command).</p>
+</blockquote>
+<p>Steps 1 and 2 will also not work if you are using AWS CLI (version 2.*). Instead use</p>
+<pre><code class="bash">$ aws_account_id=&quot;340268328991&quot;
+$ aws_region=&quot;eu-west-2&quot;
+$ ecr_url=&quot;${aws_account_id}.dkr.ecr.${aws_region}.amazonaws.com&quot;
+
+$ aws --region &quot;${aws_region}&quot; ecr get-login-password \
+    | docker login \
+        --password-stdin \
+        --username AWS \
+        &quot;${aws_account_id}.dkr.ecr.${aws_region}.amazonaws.com&quot;
+
+Login Succeeded
+</code></pre>
+
+<h4 id="pulling-pushing-images">Pulling &amp; Pushing Images<a class="headerlink" href="#pulling-pushing-images" title="Permanent link">#</a></h4>
+<p>Within the ACP Kubernetes Clusters, you do not need to provide an <code>imagePullSecret</code> as was previously required for images in Artifactory. The ACP Clusters will authenticate behind-the-scenes and be able to successfully pull images from any Docker Repositories you create via the Platform Hub.</p>
+<p>The Docker Repositories section of the Platform Hub will provide a URL such as follows for the Repository you have created: <code>340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app</code></p>
+<p>Now that you have locally authenticated with AWS ECR, you can pull and push (if write access was granted) images as normal:</p>
+<pre><code class="bash">$ docker build . -t 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app:v0.0.1
+
+Sending build context to Docker daemon  32.78MB
+...
+Successfully built 882e2cadb649
+Successfully tagged 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app:v0.0.1
+
+$ docker push 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app:v0.0.1
+
+The push refers to repository [340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app]
+afbe4b47c182: Pushed
+78147c906fce: Pushed
+86177d14466d: Pushed
+f55514f6bd18: Pushed
+ce74984572d7: Pushed
+67d7e5db87ee: Pushed
+12d012372115: Pushed
+b0bb54920d03: Pushed
+835c2760f26b: Pushed
+e9bcacee1741: Pushed
+cd7100a72410: Pushed
+v0.0.1: digest: sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f size: 2628
+
+$ docker pull 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app:v0.0.1@sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f
+
+sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f: Pulling from acp/hello-world-app
+Digest: sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f
+Status: Image is up to date for 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app@sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f
+</code></pre>
+
+<h4 id="listing-images-housekeeping">Listing Images &amp; Housekeeping<a class="headerlink" href="#listing-images-housekeeping" title="Permanent link">#</a></h4>
+<p>Using the AWS CLI you can list all images that have been pushed to a given repository which you have access to.</p>
+<p>For example:</p>
+<pre><code class="sh">$ aws ecr list-images --repository-name acp/hello-world-app
+{
+    &quot;imageIds&quot;: [
+        {
+            &quot;imageDigest&quot;: &quot;sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f&quot;,
+            &quot;imageTag&quot;: &quot;v0.0.1&quot;
+        },
+        {
+            &quot;imageDigest&quot;: &quot;sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f&quot;,
+            &quot;imageTag&quot;: &quot;latest&quot;
+        }
+    ]
+}
+</code></pre>
+
+<p>To delete old images, you must have write access enabled or perform the action via a Robot Account. Images can be deleted based on a provided tag or digest. When providing a digest, all image tags with the same digest are deleted together.</p>
+<pre><code class="sh">$ aws ecr batch-delete-image --repository-name acp/hello-world-app --image-ids imageTag=v0.0.1
+{
+    &quot;imageIds&quot;: [
+        {
+            &quot;imageDigest&quot;: &quot;sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f&quot;,
+            &quot;imageTag&quot;: &quot;v0.0.1&quot;
+        }
+    ],
+    &quot;failures&quot;: []
+}
+
+$ aws ecr batch-delete-image --repository-name acp/hello-world-app --image-ids imageDigest=sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f
+{
+    &quot;imageIds&quot;: [
+        {
+            &quot;imageDigest&quot;: &quot;sha256:0309d2655ecef6b4181ee93edfb91f386fc2ebc7849cc88f6e7a18b0d349c35f&quot;,
+            &quot;imageTag&quot;: &quot;latest&quot;
+        }
+    ],
+    &quot;failures&quot;: []
+}
+</code></pre>
+
+<h4 id="managing-image-deployments-via-drone-ci">Managing Image Deployments via Drone CI<a class="headerlink" href="#managing-image-deployments-via-drone-ci" title="Permanent link">#</a></h4>
+<p>The Docker Authorisation Token generated via the aws-cli command is only valid for 12 hours, and so this can't be used as a Drone Secret for Docker Image builds. Instead, you would need to store the IAM Credentials for a Robot Account as Drone Secrets and perform the <code>aws ecr get-login</code> + <code>docker login ..</code> step on each build.</p>
+<p>To simplify this process you can use a custom Drone ECR plugin, which:
+- Builds a docker image in the root repository directory, with custom build arguments passed in (optional)
+- Authenticates to ECR using your AWS IAM credentials (stored as Drone Secrets)
+- Pushes the image to ECR with the given tags in the list (latest and commit sha)</p>
+<p><strong>Example Pipeline:</strong></p>
+<pre><code class="yml">pipeline:
+  build_push_to_ecr:
+    image: quay.io/ukhomeofficedigital/ecr:latest
+    secrets:
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+    repo: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/hello-world-app
+    build_args:
+    - APP_BUILD=${DRONE_COMMIT_SHA}
+    tags:
+    - latest
+    - ${DRONE_COMMIT_SHA}
+</code></pre>
+
+<blockquote>
+<p>The <strong><a href="https://github.com/UKHomeOffice/docker-ecr">UKHomeOffice ECR image</a></strong> above is based off the official <a href="https://hub.docker.com/r/plugins/ecr">Docker ECR Plugin</a>, with amendments to run in ACP Drone CI.</p>
+</blockquote>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.22b62ea4.min.js"></script>
+      <script src="../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.f6ebf1dc.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
